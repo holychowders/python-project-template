@@ -13,7 +13,7 @@ repos:
     hooks:
     -   id: isort
         name: isort
-        entry: isort ./src
+        entry: isort ./src --profile black
         language: python
         types: [text]
         pass_filenames: false
