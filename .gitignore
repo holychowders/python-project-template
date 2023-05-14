@@ -1,2 +1,9 @@
 venv/
 .python-version
+
+.idea/
+
+todo.md
+todo.txt
+notes.md
+notes.txt
