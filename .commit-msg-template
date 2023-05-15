@@ -13,4 +13,4 @@
 # scope examples: parser, db, ui
 # Example header: fix(ui): use consistent border thickness for input fields
 #
-# To disable this message, run `git config commit.template` (empty argument)
+# To disable this message, run `git config --unset commit.template`
