@@ -1,8 +1,7 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 
-default_install_hook_types:
-  [commit-msg, pre-commit, pre-push, pre-merge-commit, pre-rebase]
+default_install_hook_types: [commit-msg, pre-merge-commit, pre-commit, pre-push]
 
 repos:
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
@@ -13,35 +12,13 @@ repos:
         additional_dependencies:
           ["@commitlint/config-conventional", "@commitlint/format"]
 
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
-    hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-yaml
-      - id: check-toml
-      - id: requirements-txt-fixer
-      - id: check-merge-conflict
-        name: "check for merge conflict strings"
-
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: "v3.0.0-alpha.9-for-vscode"
     hooks:
       - id: prettier
         # FIXME: Doesn't format toml and gitignore?
-        # FIXME: Doesn't always warn when failed to format (eg, broken syntax)
+        # FIXME: Doesn't warn when failed to format (eg, broken syntax)
         types_or: [yaml, markdown, javascript]
-
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.4.0
-    hooks:
-      - id: pyupgrade
-        args: [--py311]
-
-  - repo: https://github.com/PyCQA/autoflake
-    rev: v2.1.1
-    hooks:
-      - id: autoflake
 
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
@@ -53,15 +30,10 @@ repos:
     hooks:
       - id: black
 
-  - repo: https://github.com/jendrikseipp/vulture
-    rev: v2.7
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.269"
     hooks:
-      - id: vulture
-
-  - repo: https://github.com/PyCQA/pylint
-    rev: v3.0.0a6
-    hooks:
-      - id: pylint
+      - id: ruff
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.3.0
@@ -69,15 +41,27 @@ repos:
       - id: mypy
         additional_dependencies: [tokenize-rt==3.2.0]
 
-  - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
-    hooks:
-      - id: flake8
-        additional_dependencies: [flake8-bugbear]
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
       - id: check-added-large-files
+      - id: check-toml
+      - id: requirements-txt-fixer
+      - id: check-merge-conflict
+        name: "check for merge conflict strings"
       - id: no-commit-to-branch
         name: "don't commit directly to main"
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        stages: [commit, push]
+        entry: pytest
+        language: python
+        additional_dependencies: [pytest]
+        pass_filenames: false
+        always_run: true

@@ -2,6 +2,7 @@ venv/
 .python-version
 
 .idea/
+.vscode/
 
 todo.md
 todo.txt
