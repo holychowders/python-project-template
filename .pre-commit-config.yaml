@@ -39,7 +39,7 @@ repos:
     rev: v1.3.0
     hooks:
       - id: mypy
-        additional_dependencies: [tokenize-rt==3.2.0]
+        additional_dependencies: [tokenize-rt==3.2.0, pytest]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
