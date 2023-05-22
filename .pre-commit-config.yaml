@@ -54,3 +54,14 @@ repos:
         name: "check for merge conflict strings"
       - id: no-commit-to-branch
         name: "don't commit directly to main"
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        stages: [commit, push]
+        entry: pytest
+        language: python
+        additional_dependencies: [pytest]
+        pass_filenames: false
+        always_run: true
